@@ -12,7 +12,6 @@ namespace MailSender.lib.Services
 {
     public class RecipientsStoreInMemory : DataStoreInMemory<Recipient>, IRecipientsStore
     {
-
         public RecipientsStoreInMemory() : base(TestData.Recipients) { }
        
         public override void Edit(int id, Recipient recipient)

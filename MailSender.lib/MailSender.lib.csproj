@@ -93,7 +93,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\DebugMailSender.cs" />
     <Compile Include="Services\InMemory\DataStoreInMemory.cs" />
+    <Compile Include="Services\InMemory\MailsStoreInMemory.cs" />
+    <Compile Include="Services\InMemory\SendersStoreInMemory.cs" />
+    <Compile Include="Services\InMemory\ServersStoreInMemory.cs" />
     <Compile Include="Services\Interfaces\IDataStore.cs" />
     <Compile Include="Services\Interfaces\IMailingListStore.cs" />
     <Compile Include="Services\Interfaces\IMailStore.cs" />

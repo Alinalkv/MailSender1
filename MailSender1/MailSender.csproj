@@ -88,6 +88,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Infrastructure\Services\Interfaces\ISenderEditor.cs" />
+    <Compile Include="Infrastructure\Services\WindowSenderEditor.cs" />
     <Compile Include="Infrastructure\ValidationRules\RegExValidationRule.cs" />
     <Compile Include="SchedulerClass.cs" />
     <Page Include="SenderEditor.xaml">
