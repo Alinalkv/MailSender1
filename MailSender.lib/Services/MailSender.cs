@@ -55,5 +55,6 @@ namespace MailSender.lib.Services
                 ThreadPool.QueueUserWorkItem(_ => Send(mail, sender, recipient));
             }
         }
+        //Тест тратата
     }
 }
