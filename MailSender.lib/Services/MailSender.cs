@@ -56,6 +56,27 @@ namespace MailSender.lib.Services
             }
         }
 
-        //Тест
+        public async Task SendAsync(Mail mail, Sender sender, Recipient recipient)
+        {
+            using (System.Net.Mail.MailMessage msg = new MailMessage(sender.Address, recipient.Address))
+            {
+                msg.Subject = mail.Subject;
+                msg.Body = mail.Body;
+                msg.IsBodyHtml = false;
+
+                using (System.Net.Mail.SmtpClient client = new SmtpClient(_Server.Address, _Server.Port))
+                {
+                    client.EnableSsl = _Server.UserSSL;
+                    client.Credentials = new NetworkCredential(_Server.Login, _Server.Password);
+                    await client.SendMailAsync(msg).ConfigureAwait(false);
+                }
+
+            }
+        }
+
+        public async Task SendAsync(Mail mail, Sender sender, IEnumerable<Recipient> recipients)
+        {
+            await Task.WhenAll(recipients.Select(recipient => SendAsync(mail, sender, recipient))).ConfigureAwait(false);
+        }
     }
 }
