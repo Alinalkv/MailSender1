@@ -106,6 +106,7 @@
     <Compile Include="Services\Interfaces\ISchedulerTaskStore.cs" />
     <Compile Include="Services\Interfaces\ISenderStore.cs" />
     <Compile Include="Services\Interfaces\IServerStore.cs" />
+    <Compile Include="Services\MailSchedulerTPL.cs" />
     <Compile Include="Services\MailSender.cs" />
     <Compile Include="Services\RecipientsManager.cs" />
     <Compile Include="Services\InMemory\RecipientsStoreInMemory.cs" />

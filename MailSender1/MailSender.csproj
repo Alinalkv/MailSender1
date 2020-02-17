@@ -91,7 +91,6 @@
     <Compile Include="Infrastructure\Services\Interfaces\ISenderEditor.cs" />
     <Compile Include="Infrastructure\Services\WindowSenderEditor.cs" />
     <Compile Include="Infrastructure\ValidationRules\RegExValidationRule.cs" />
-    <Compile Include="SchedulerClass.cs" />
     <Page Include="SenderEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
