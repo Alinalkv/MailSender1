@@ -17,6 +17,7 @@ using System.Net.Mail;
 using MailSender.lib.Entities;
 using MailSender.lib.Services;
 using MailSender.lib.Service;
+using MailSender.lib.Data;
 
 namespace MailSender1
 {
@@ -28,6 +29,16 @@ namespace MailSender1
         public MainWindow()
         {
             InitializeComponent();
+
+            using (var db = new MailSenderDBContext())
+            {
+               db.Database.Log = Console.WriteLine;
+
+                foreach (var item in db.RecipientDBs)
+                {
+                    Console.WriteLine(item.Name);
+                }
+            }
         }
 
         private void OnButtonClickSendMail(object sender, RoutedEventArgs e)
