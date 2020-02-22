@@ -177,6 +177,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBaseRecipients.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Entities\MailDB.cs" />
+    <Compile Include="Data\Entities\RecipientDB.cs" />
+    <Compile Include="Data\Entities\SenderDB.cs" />
+    <Compile Include="Data\Entities\ServerDB.cs" />
     <Compile Include="Data\TestData.cs" />
     <Compile Include="Entities\Base\Entity.cs" />
     <Compile Include="Entities\Base\NamedEntity.cs" />
