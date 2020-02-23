@@ -15,7 +15,9 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using MailSender.lib.Data;
 using MailSender.lib.Services;
+using MailSender.lib.Services.EF;
 using MailSender.lib.Services.InMemory;
 using MailSender.lib.Services.Interfaces;
 using MailSender1.Infrastructure.Services;
@@ -49,12 +51,14 @@ namespace MailSender1.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<IRecipientsManager, RecipientsManager>();
-            SimpleIoc.Default.Register<IRecipientsStore, RecipientsStoreInMemory>();
+            //SimpleIoc.Default.Register<IRecipientsStore, RecipientsStoreInMemory>();
+            SimpleIoc.Default.Register<IRecipientsStore, RecipientsStoreEF>();
             SimpleIoc.Default.Register<ISenderStore, SendersStoreInMemory>();
             SimpleIoc.Default.Register<IServerStore, ServersStoreInMemory>();
             SimpleIoc.Default.Register<IMailStore, MailsStoreInMemory>();
             SimpleIoc.Default.Register<ISenderEditor, WindowSenderEditor>();
-            
+            SimpleIoc.Default.Register<MailSenderDBContext>();
+
         }
 
         public MainViewModel Main

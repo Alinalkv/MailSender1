@@ -1,4 +1,5 @@
-﻿using MailSender.lib.Data.Entities;
+﻿using GalaSoft.MvvmLight.Ioc;
+using MailSender.lib.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,11 +11,15 @@ namespace MailSender.lib.Data
 {
     public class MailSenderDBContext : DbContext
     {
-        public DbSet<MailDB> MailDBs { get; set; }
-        public DbSet<RecipientDB> RecipientDBs { get; set; }
-        public DbSet<SenderDB> SenderDBs { get; set; }
-        public DbSet<ServerDB> ServerDBs { get; set; }
 
+        public DbSet<Mail> Mails { get; set; }
+        public DbSet<Recipient> Recipients { get; set; }
+        public DbSet<Sender> Senders { get; set; }
+        public DbSet<Server> Servers { get; set; }
+        public DbSet<MailingList> MailingLists { get; set; }
+        public DbSet<SchedulerTask> SchedulerTasks { get; set; }
+
+        [PreferredConstructorAttribute]
         public MailSenderDBContext() : base("name=DefaultConnection")
         {
 

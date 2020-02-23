@@ -32,7 +32,7 @@ namespace MailSender1
 
             //using (var db = new MailSenderDBContext())
             //{
-            //   db.Database.Log = Console.WriteLine;
+            //    db.Database.Log = Console.WriteLine;
 
             //    foreach (var item in db.RecipientDBs)
             //    {

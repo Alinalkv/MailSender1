@@ -177,10 +177,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBaseRecipients.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Data\Entities\MailDB.cs" />
-    <Compile Include="Data\Entities\RecipientDB.cs" />
-    <Compile Include="Data\Entities\SenderDB.cs" />
-    <Compile Include="Data\Entities\ServerDB.cs" />
     <Compile Include="Data\MailSenderDBContext.cs" />
     <Compile Include="Data\TestData.cs" />
     <Compile Include="Entities\Base\Entity.cs" />
@@ -199,6 +195,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\DebugMailSender.cs" />
+    <Compile Include="Services\EF\RecipientsStoreEF.cs" />
     <Compile Include="Services\InMemory\DataStoreInMemory.cs" />
     <Compile Include="Services\InMemory\MailsStoreInMemory.cs" />
     <Compile Include="Services\InMemory\SendersStoreInMemory.cs" />
