@@ -30,15 +30,15 @@ namespace MailSender1
         {
             InitializeComponent();
 
-            using (var db = new MailSenderDBContext())
-            {
-               db.Database.Log = Console.WriteLine;
+            //using (var db = new MailSenderDBContext())
+            //{
+            //   db.Database.Log = Console.WriteLine;
 
-                foreach (var item in db.RecipientDBs)
-                {
-                    Console.WriteLine(item.Name);
-                }
-            }
+            //    foreach (var item in db.RecipientDBs)
+            //    {
+            //        Console.WriteLine(item.Name);
+            //    }
+            //}
         }
 
         private void OnButtonClickSendMail(object sender, RoutedEventArgs e)
