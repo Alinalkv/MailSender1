@@ -230,6 +230,8 @@
     <Compile Include="Services\InMemory\ServersStoreInMemory.cs" />
     <Compile Include="Services\Interfaces\IDataStore.cs" />
     <Compile Include="Services\Interfaces\IMailingListStore.cs" />
+    <Compile Include="Services\Interfaces\IMailScheduler.cs" />
+    <Compile Include="Services\Interfaces\IMailSenderService.cs" />
     <Compile Include="Services\Interfaces\IMailStore.cs" />
     <Compile Include="Services\Interfaces\IRecipientsManager.cs" />
     <Compile Include="Services\Interfaces\IRecipientsStore.cs" />

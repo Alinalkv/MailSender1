@@ -66,6 +66,9 @@ namespace MailSender1.ViewModel
             SimpleIoc.Default.Register<MailSenderDBContext>();
             // SimpleIoc.Default.Register(() => new DbContextOptionsBuilder<MailSenderDBContext>().UseSqlServer(App.Configuration.GetConnectionString("DefaultConnection")).Options);
             SimpleIoc.Default.Register<MailSenderDBInitializer>();
+            //рабочий рассыльщик
+            //SimpleIoc.Default.Register<IMailSenderService, MailSenderService>();
+            SimpleIoc.Default.Register<IMailSenderService, DebugMailSenderService>();
 
             var db_init = (MailSenderDBInitializer) SimpleIoc.Default.GetService(typeof(MailSenderDBInitializer));
             var init_task = Task.Run(() => db_init.InitializeAsync());

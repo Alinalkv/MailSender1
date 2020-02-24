@@ -9,17 +9,19 @@ using MailSender.lib.Services.Interfaces;
 
 namespace MailSender.lib.Services
 {
-    public class MailSchedulerTPL
+    public class MailSchedulerTPL : IMailScheduler
     {
-        private ISchedulerTaskStore _TaskStore;
+        private readonly ISchedulerTaskStore _TaskStore;
         private volatile CancellationTokenSource _TaskCanceliation;
+        private readonly IMailSenderService _MailSenderService;
 
-        public MailSchedulerTPL(ISchedulerTaskStore TaskStore)
+        public MailSchedulerTPL(ISchedulerTaskStore TaskStore, IMailSenderService MailSenderService)
         {
             _TaskStore = TaskStore;
+            _MailSenderService = MailSenderService;
         }
 
-        public async Task StartAsync()
+        public void Start()
         {
             var cancellation = new CancellationTokenSource();
             Interlocked.Exchange(ref _TaskCanceliation, cancellation)?.Cancel();
@@ -35,18 +37,24 @@ namespace MailSender.lib.Services
 
         private async void WaitTaskAsync(SchedulerTask task, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
             var taskTime = task.Date;
             var delta = taskTime.Subtract(DateTime.Now);
-            await Task.Delay(delta, token).ConfigureAwait(false);
+
+            if(delta.TotalSeconds > 0)
+                await Task.Delay(delta, token).ConfigureAwait(false);
+
+            token.ThrowIfCancellationRequested();
             await ExecuteTaskAsync(task, token);
             _TaskStore.Remove(task.Id);
-            await StartAsync();
+            await Task.Run((Action) Start, token);
         }
 
         private async Task ExecuteTaskAsync(SchedulerTask task, CancellationToken token)
         {
-            throw new NotImplementedException();
-            //Test
+            token.ThrowIfCancellationRequested();
+            var sender = _MailSenderService.GetSender(task.Server);
+            await sender.SendAsync(task.Mail, task.Sender, task.MailingList.Recipients, token);
         }
     }
 }
