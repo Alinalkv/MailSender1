@@ -22,6 +22,9 @@ using MailSender.lib.Services.InMemory;
 using MailSender.lib.Services.Interfaces;
 using MailSender1.Infrastructure.Services;
 using MailSender1.Infrastructure.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace MailSender1.ViewModel
 {
@@ -31,6 +34,7 @@ namespace MailSender1.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
@@ -49,6 +53,8 @@ namespace MailSender1.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+
+           // SimpleIoc.Default.Register(() => App.Configuration);
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<IRecipientsManager, RecipientsManager>();
             //SimpleIoc.Default.Register<IRecipientsStore, RecipientsStoreInMemory>();
@@ -58,7 +64,12 @@ namespace MailSender1.ViewModel
             SimpleIoc.Default.Register<IMailStore, MailsStoreInMemory>();
             SimpleIoc.Default.Register<ISenderEditor, WindowSenderEditor>();
             SimpleIoc.Default.Register<MailSenderDBContext>();
+            // SimpleIoc.Default.Register(() => new DbContextOptionsBuilder<MailSenderDBContext>().UseSqlServer(App.Configuration.GetConnectionString("DefaultConnection")).Options);
+            SimpleIoc.Default.Register<MailSenderDBInitializer>();
 
+            var db_init = (MailSenderDBInitializer) SimpleIoc.Default.GetService(typeof(MailSenderDBInitializer));
+            var init_task = Task.Run(() => db_init.InitializeAsync());
+            init_task.Wait();
         }
 
         public MainViewModel Main
