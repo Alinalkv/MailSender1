@@ -1,4 +1,5 @@
 ﻿using MailSender.lib.Entities;
+using MailSender.lib.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,13 @@ using System.Threading.Tasks;
 namespace MailSender.lib.Services
 {
 
-    public class MailSender
+    public class MailSenderService : IMailSenderService
     {
+        public IMailSender GetSender(Server Server) => new MailSender(Server);
+    }
 
+    public class MailSender : IMailSender
+    {
         private Server _Server;
 
 
@@ -74,7 +79,8 @@ namespace MailSender.lib.Services
             }
         }
 
-        public async Task SendAsync(Mail mail, Sender sender, IEnumerable<Recipient> recipients)
+        //тут дб CancelationToken
+        public async Task SendAsync(Mail mail, Sender sender, IEnumerable<Recipient> recipients, CancellationToken token)
         {
             await Task.WhenAll(recipients.Select(recipient => SendAsync(mail, sender, recipient))).ConfigureAwait(false);
         }
